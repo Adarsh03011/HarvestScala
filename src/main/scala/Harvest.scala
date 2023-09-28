@@ -59,7 +59,7 @@ object Harvest extends App{
       case (month, data) =>
         val (name, _ , total) = data.maxBy(_._3)
         ((month), name , total)
-    }
+    }.toList.sortBy(_._1)
   println("Monthly best gatherer in collecting maximum qunatity")
   monthlyBestGatherer.foreach(x => println(f"${Month.of(x._1)}: {name=${x._2},qty=${x._3}%1.2f}"))
 
@@ -130,9 +130,9 @@ object Harvest extends App{
     case(month,data) =>
       val max = data.maxBy(_._3)
       (month,max)
-  }.values
+  }.toList.sortBy(_._2._3)
   println("\nMonthly Most profitable fruit")
-  monthlyBestFruit.foreach(x => println(f"${Month.of(x._1)}: {name=${x._2},amount=${x._3}%1.2f}"))
+  monthlyBestFruit.foreach(x => println(f"${Month.of(x._1)}: {name=${x._2._2},amount=${x._2._3}%1.2f}"))
 
 
   // ---------------------------- Monthly least profitable fruit ---------------------------------
@@ -154,9 +154,9 @@ object Harvest extends App{
     case (month, data) =>
       val min = data.minBy(_._3)
       (month, min)
-  }.values
+  }.toList.sortBy(_._1)
   println("\nMonthly Most profitable fruit")
-  monthlyLeastProfitableFruit.foreach(x => println(f"${Month.of(x._1)}: {name=${x._2},amount=${x._3}%1.2f}"))
+  monthlyLeastProfitableFruit.foreach(x => println(f"${Month.of(x._1)}: {name=${x._2._2},amount=${x._2._3}%1.2f}"))
 
   // ----------------------------- Monthly best earning by gatherer ------------------------------------
 
@@ -177,9 +177,10 @@ object Harvest extends App{
     case(month,data) =>
       val bestEarner = data.maxBy(_._3)
       (month,bestEarner)
-  }.values
+  }.toList.sortBy(_._1)
+  println(monthlyBestEarner)
   println("\nMonthly best gatherer")
-  monthlyBestEarner.foreach(x => println(f"${Month.of(x._1)}: {name=${x._2},amount=${x._3}%1.2f}"))
+  monthlyBestEarner.foreach(x => println(f"${Month.of(x._1)}: {name=${x._2._2},amount=${x._2._3}%1.2f}"))
 
 
 
